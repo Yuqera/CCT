@@ -30,7 +30,15 @@ jobs:
     - name: Generate report
       run: reportgenerator "-reports:TestResults/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
-    - uses: actions/upload-artifact@v2
+    - name: Uploading report to artifacts
+      uses: actions/upload-artifact@v2
       with:
         name: codecov-report
         path: coveragereport/
+
+    - name: Comparing coverage percentages
+      uses: codecov/codecov-action@v1
+      with: 
+        file: TestResults/coverage.cobertura.xml
+        flags: unittests
+        fail_ci_if_error: true
