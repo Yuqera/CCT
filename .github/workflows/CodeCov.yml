@@ -25,7 +25,8 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Test code coverage
-      run: dotnet test 
+      #Threshold = percetage 0-100 | ThresholdType=line/branch/method
+      run:  dotnet test
         /p:CollectCoverage=true 
         /p:CoverletOutputFormat=opencover 
         /p:Threshold=70 
