@@ -25,10 +25,10 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Generate code coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput='../TestResults/'
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='../TestResults/'
 
     - name: Generate report
-      run: reportgenerator "-reports:TestResults/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+      run: reportgenerator "-reports:TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
 
     - name: Uploading report to artifacts
       uses: actions/upload-artifact@v2
@@ -39,6 +39,6 @@ jobs:
     - name: Comparing coverage percentages
       uses: codecov/codecov-action@v1
       with: 
-        file: TestResults/coverage.cobertura.xml
+        file: TestResults/coverage.opencover.xml
         flags: unittests
         fail_ci_if_error: true
