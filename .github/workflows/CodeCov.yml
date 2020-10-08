@@ -25,7 +25,7 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Generate code coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile=\"**/Models/**/*.cs\" /p:Threshold=30 /p:ThresHoldType=line /p:ThresholdStat=Total /p:CoverletOutput='../TestResults/'
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=70 /p:ThresHoldType=line /p:ThresholdStat=Total /p:CoverletOutput='../TestResults/' /p:Exclude=\"[*]*/Models.*\"
 
     - name: Generate report
       run: reportgenerator "-reports:TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
@@ -35,10 +35,3 @@ jobs:
       with:
         name: codecov-report
         path: coveragereport/
-
-    - name: Comparing coverage percentages
-      uses: codecov/codecov-action@v1
-      with: 
-        file: TestResults/coverage.opencover.xml
-        flags: unittests
-        fail_ci_if_error: true
