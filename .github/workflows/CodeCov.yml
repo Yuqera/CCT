@@ -25,10 +25,20 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Test code coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=70 /p:ThresHoldType=line /p:ThresholdStat=Total /p:CoverletOutput='../TestResults/' /p:ExcludeByFile=\"**/models/**/*.cs\"
+      run: dotnet test 
+        /p:CollectCoverage=true 
+        /p:CoverletOutputFormat=opencover 
+        /p:Threshold=70 
+        /p:ThresHoldType=line 
+        /p:ThresholdStat=Total 
+        /p:CoverletOutput='../TestResults/' 
+        /p:ExcludeByFile=\"**/models/**/*.cs\"
 
     - name: Generate report
-      run: reportgenerator "-reports:TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
+      run: reportgenerator 
+        "-reports:TestResults/coverage.opencover.xml" 
+        "-targetdir:coveragereport" 
+        -reporttypes:Html
 
     - name: Upload report to artifacts
       uses: actions/upload-artifact@v2
