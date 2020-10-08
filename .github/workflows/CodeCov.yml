@@ -24,10 +24,13 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
       
-    - name: Generate report
+    - name: Generate code coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput='../TestResults/'
+
+    - name: Generate report
+      run: reportgenerator "-reports:TestResults/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
     - uses: actions/upload-artifact@v2
       with:
         name: codecov-report
-        path: TestResults/coverage.cobertura.xml
+        path: coveragereport/
