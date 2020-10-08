@@ -22,4 +22,9 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Generate report
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput='../TestResults/'
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput='../TestResults/result.json'
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: codecov-report
+        path: TestResults/result.json
