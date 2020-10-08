@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Models
+namespace Models.SubFolder
 {
     public class Accountant
     {
