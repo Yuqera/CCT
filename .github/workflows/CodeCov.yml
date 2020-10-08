@@ -25,7 +25,7 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: Generate code coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='../TestResults/'
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile=\"**/Models/**/*.cs\" /p:Threshold=30 /p:ThresHoldType=line /p:ThresholdStat=Total /p:CoverletOutput='../TestResults/'
 
     - name: Generate report
       run: reportgenerator "-reports:TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
