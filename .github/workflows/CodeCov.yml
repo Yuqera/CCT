@@ -24,13 +24,13 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
       
-    - name: Generate code coverage
+    - name: Test code coverage
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=70 /p:ThresHoldType=line /p:ThresholdStat=Total /p:CoverletOutput='../TestResults/' /p:ExcludeByFile=\"**/Models/*.cs\"
 
     - name: Generate report
       run: reportgenerator "-reports:TestResults/coverage.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html
 
-    - name: Uploading report to artifacts
+    - name: Upload report to artifacts
       uses: actions/upload-artifact@v2
       with:
         name: codecov-report
