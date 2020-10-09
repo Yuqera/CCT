@@ -33,7 +33,7 @@ jobs:
         /p:ThresHoldType=line 
         /p:ThresholdStat=Total 
         /p:CoverletOutput='../TestResults/' 
-        /p:ExcludeByFile=\"**/models/**/*.cs\"
+        /p:ExcludeByFile=\"**/models/**/*.cs, **/Microsoft.NET.Test/**/*.cs, **/Data/**/*.cs, **/Repositories.Tests/**/*.cs, **/Services.Sources.Resources/**/.cs\"
 
     - name: Generate report
       run: reportgenerator 
